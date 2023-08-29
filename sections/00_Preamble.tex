@@ -27,7 +27,7 @@
 % Setup for Titlepage
 % ----------------------------------------------------------------------------------------
 \title[NUFFT \& CS]{NUFFT and Compressed Sensing}
-\author[Z Tan \& M Zai\ss]{Zhengguo Tan and Moritz Zai\ss}
+\author[Z Tan \& M Zai\ss]{Dr.~Zhengguo Tan and Prof.~Dr.~Moritz Zai\ss}
 \institute[FAU]{Friedrich-Alexander-Universit\"at Erlangen-N\"urnberg}
 \date{\today}
 % ========================================================================================
@@ -80,7 +80,16 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \addtobeamertemplate{footnote}{\hskip -2em}{}
+\usepackage{lipsum}
 \usepackage{listings}
+\usepackage{pdfpages}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
 
 % ========================================================================================
 % Various custom commands

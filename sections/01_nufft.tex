@@ -51,7 +51,15 @@
 			\end{figure}
 		\end{column}
 	\end{columns}
+\end{frame}
 
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[page=3, width=0.8\textwidth]{fig/noncartesian_mri_overview.pdf}
+    \end{figure}
+    \blfootnote{Courtesy: Dr.~Frank Ong @ UC Berkeley}
 \end{frame}
 
 
@@ -94,7 +102,7 @@
 			\includegraphics[width=\columnwidth]{fig/mri-trj-radial.png}
 		\end{figure}
 	\end{column}
-	
+
 	\begin{column}{0.35\textwidth}
 		\centering
 		DCF
@@ -117,7 +125,7 @@
 			\includegraphics[width=\columnwidth]{fig/interp.png}
 		\end{figure}
 	\end{column}
-	
+
 	\begin{column}{0.30\textwidth}
 		\centering
 		Kaiser-Bessel Window
@@ -131,44 +139,64 @@
 
 
 \begin{frame}{NUFFT Step 3: Deapodization}
-	
+
 	\begin{itemize}
 		\item The gridded signal on Cartesian grids can be written as the convolution between the non-Cartesian signal and the Kaiser-Bessel window,
 		\begin{equation}
 			s_\mathrm{Cart} = s_\mathrm{non-Cart} \circledast W_\mathrm{kb}
 		\end{equation}
-	
+
 		\vspace{1em}
-		
+
 		\item with FFT, it becomes
 		\begin{equation}
 			\mathcal{F} \{s_\mathrm{Cart} \} = \mathcal{F} \{ s_\mathrm{non-Cart} \} \cdot \mathcal{F} \{ W_\mathrm{kb} \}
 		\end{equation}
-		
+
 		\vspace{1em}
-	
+
 		\item Then deapodization is
 		\begin{equation}
 			I = \mathcal{F} \{s_\mathrm{Cart} \} ./ \mathcal{F} \{ W_\mathrm{kb} \}
 		\end{equation}
-	
+
 	\end{itemize}
-	
+
 \end{frame}
 
 
-\begin{frame}{NUFFT Recap}
+\begin{frame}{NUFFT Implementations}
+    \begin{enumerate}
+        \item Python / PyTorch -
+        \vspace{1em}
+        \begin{itemize}
+            \item sigpy: \url{https://github.com/mikgroup/sigpy}
+            \vspace{0.5em}
+            \item torchkbnufft: \url{https://github.com/mmuckley/torchkbnufft}
+        \end{itemize}
+
+        \vspace{2em}
+        \item C -
+        \vspace{1em}
+        \begin{itemize}
+            \item Gridding Functions: \url{http://mrsrl.stanford.edu/~brian/gridding/}
+            \vspace{0.5em}
+            \item BART: \url{https://github.com/mrirecon/bart}
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{NUFFT Exercises}
 	\begin{itemize}
-		\item Any questions with regard to NUFFT?
-		\vspace{2em}
-		\item Any question with regard to NUFFT exercises?
-		\vspace{4em}
-		\item What if the density compensation function is unknown?
-%		\item [$\rightarrow$] 
-%		\begin{equation}
-%			content...
-%		\end{equation}
+		\item Double "num\_samples" in the function "make\_adc"
+		\vspace{1em}
+        \item Reduce "Nphase", what undersampling artifacts do you see?
+        \vspace{1em}
+		\item What artifacts do you see in the presence of gradient delays?
+		\vspace{1em}
+        \item How would you correct for gradient delays in reality?
+		\vspace{1em}
+        \item What if the density compensation function is unknown?
 	\end{itemize}
 \end{frame}
-
-

@@ -9,7 +9,7 @@
 				\includegraphics[width=\columnwidth]{fig/comics_02.png}
 			\end{figure}
 		\end{column}
-	
+
 		\begin{column}{0.55\textwidth}
 			\begin{itemize}
 				\item Candes EJ, Romberg JK, Tao T. Stable signal recovery from incomplete and inaccurate measurements. \textit{Commun Pure Appl Math} (2006).
@@ -26,8 +26,16 @@
 \end{frame}
 
 
+\begin{frame}
+    \begin{figure}
+        \includegraphics[page=5, width=0.8\textwidth]{fig/learned_dictionaries.pdf}
+        \blfootnote{Courtesy: Prof.~Dr.~Jon Tamir @ UT Austin}
+    \end{figure}
+\end{frame}
+
+
 \begin{frame}{What is Nyquist Limit?}
-	
+
 	\begin{block}{Nyquist Sampling Requirement}
 		{\large
 		Given an imaging field-of-view (FOV), the sampling in $k$-space must satisfy
@@ -35,11 +43,11 @@
 			\Delta k \leq 1/\mathrm{FOV}
 		\end{equation}}
 	\end{block}
-	
+
 	\begin{figure}
 		\includegraphics[width=0.9\textwidth]{fig/Nyquist.png}
 	\end{figure}
-	
+
 \end{frame}
 
 
@@ -61,18 +69,18 @@
 
 
 \begin{frame}{Before Compressed Sensing: Parallel Imaging as SENSE \footnote{Pruessmann KP, Weiger M, Scheidegger MB, Boesiger P. SENSE: sensitivity encoding for fast MRI. \textit{Magn Reson Med} (1999).}}
-	
+
 	\begin{figure}
 		\includegraphics[width=0.8\textwidth]{fig/mri-pi.png}
 	\end{figure}
-	
+
 \end{frame}
 
 
 \begin{frame}{Parallel Imaging as SENSE: Solving a Linear Inverse Problem}
-	
+
 	Objective function:
-	
+
 	\begin{equation}
 		\mathrm{argmin}_x \lVert y -  \mathcal{P} \mathcal{F} \mathcal{S} x \rVert_2^2
 	\end{equation}
@@ -91,9 +99,9 @@
 
 
 \begin{frame}{What is Linear Inverse Problem and What is Gradient?}
-	
+
 	Objective function:
-	
+
 	\begin{equation}
 		\mathrm{argmin}_x \lVert 2 - x \rVert_2^2
 	\end{equation}
@@ -101,7 +109,7 @@
 	\vfill
 
 	Given initial guess $x_\mathrm{prev} = 0$ and learning rate $\alpha = 0.1$,
-	
+
 	\begin{table}
 		\centering
 		\begin{tabular}{p{0.1\textwidth} p{0.25\textwidth} p{0.25\textwidth} p{0.25\textwidth}}
@@ -115,28 +123,28 @@
 			\bottomrule
 		\end{tabular}
 	\end{table}
-	
+
 \end{frame}
 
 
 \begin{frame}{What is Linear Inverse Problem and What is Gradient?}
-	
+
 	\begin{figure}
 		\includegraphics[width=\textwidth]{fig/gradient.png}
 	\end{figure}
-	
+
 \end{frame}
 
 
 \begin{frame}{Inverse Problems can Become Under-determined / Ill-posed}
 	Objective function:
-	
+
 	\begin{equation}
 		\mathrm{argmin}_{x_1, x_2} \lVert 2 - x_1 - x_2 \rVert_2^2
 	\end{equation}
 
 	\vfill
-	
+
 	\begin{itemize}
 		\item <1-> You can't find an unique solution for this function.
 		\vspace{1em}
@@ -144,7 +152,7 @@
 		\begin{equation}
 			\mathrm{s.t.}~x_1 = x_2
 		\end{equation}
-	
+
 		\item <3-> We can easily solve it, $x_1 = x_2 = 1$.
 	\end{itemize}
 
@@ -153,13 +161,13 @@
 
 \begin{frame}{We can write this toy example in a matrix format}
 	Objective function:
-	
+
 	\begin{equation}
 		\mathrm{argmin}_{x_1, x_2} \lVert 2 - x_1 - x_2 \rVert_2^2
 	\end{equation}
 
 	\vspace{1em}
-	
+
 	It is equivalent to
 	\begin{equation}
 		\mathrm{argmin}_{\mathbf{x}} \lVert \mathbf{y} - \mathbf{A} \mathbf{x} \rVert_2^2
@@ -168,7 +176,7 @@
 		x_1 \\ x_1
 	\end{pmatrix}$, $\mathbf{y} = \begin{pmatrix}
 	2 \\ 2
-	\end{pmatrix}$ and 
+	\end{pmatrix}$ and
 	$\mathbf{A} = \begin{pmatrix}
 		1 & -1 \\
 		1 & -1
@@ -188,17 +196,17 @@
 		"We eventually only need to measure one point in $k$-space!!!"
 		\vspace{1em}
 		\item <2->People like me:\\
-		"What is going on here??? Is there anyone who would like to share their codes???"
+		"What is going on here???"
 		\vspace{1em}
-		\item <3-> Prof.~Dr.~Mike Lustig from Berkeley:\\
+		\item <3-> Prof.~Dr.~Mike Lustig @ UC Berkeley:\\
 		"Sparsifying transformation changes the game!!!"
 		\begin{equation}
 			\mathrm{argmin}_x \lVert y -  \mathcal{P} \mathcal{F} \mathcal{S} x \rVert_2^2 + \lambda \lVert \Phi x \rVert_1
 		\end{equation}
 		where $\Phi$ is wavelet transform, total variation, ...
 	\end{itemize}
-	
-	
+
+
 \end{frame}
 
 
@@ -234,9 +242,9 @@
 	\vspace{1em}
 	\hrule
 	\vspace{1em}
-	
+
 	\begin{itemize}
-		\item This suffices when $\Phi$ is wavelet transform. 
+		\item This suffices when $\Phi$ is wavelet transform.
 		\item When you use total variation, you may need a more general solver such as ADAM.
 	\end{itemize}
 
@@ -252,7 +260,7 @@
 
 
 \begin{frame}{Gradient Update in Parallel MRI: CG SENSE}
-	
+
 	\begin{itemize}
 		\item density correction $D$:\\
 		$D = 1 / d \mathbf{k}$, $\mathbf{k}$ is the relative density of the $k$-space sampling pattern at the position $\vec{k}$.
@@ -265,16 +273,16 @@
 		\item <3-> Exercise 1: run the gradient step many times without soft thresholding, are you able to get a similar reconstruction as the NUFFT reconstruction with density compensation?
 		\vspace{1em}
 		\item <4-> Exercise 2: try to tune the soft thresholding parameter, and show how it affects the reconstruction
-		
+
 	\end{itemize}
-	
+
 \end{frame}
 
 
 
 \begin{frame}{It is not the end ...}
 	\begin{itemize}
-		\item Prof.~Dr.~Florian Knoll \footnote{Hammernik K, Klatzer T, Kobler E, Recht MP, Sodickson DK, Pock T, Knoll F. Learning a variational network for reconstruction of accelerated MRI data. \textit{Magn Reson Med} (2018).}:\\
+		\item Prof.~Dr.~Florian Knoll @ FAU \footnote{Hammernik K, Klatzer T, Kobler E, Recht MP, Sodickson DK, Pock T, Knoll F. Learning a variational network for reconstruction of accelerated MRI data. \textit{Magn Reson Med} (2018).}:\\
 		"Instead of hand-crafted sparsifying transform, neural network learns it!!!"
 	\end{itemize}
 \end{frame}
